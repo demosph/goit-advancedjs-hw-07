@@ -15,10 +15,9 @@
 */
 
 class Employee {
-  // Заповніть модифікатори доступу
-  name: string;
-  department: string;
-  salary: number;
+  public name: string; // доступна всім
+  private department: string; // доступна лише всередині класу Employee
+  protected salary: number; // доступна лише всередині класу Employee та його підкласів
 
   constructor(name: string, department: string, salary: number) {
     this.name = name;
@@ -32,8 +31,18 @@ class Employee {
 }
 
 class Manager extends Employee {
-  // Реалізуйте конструктор та збільшіть salary на 10000
+  constructor(name: string, department: string, salary: number) {
+    super(name, department, salary); // Викликаємо конструктор суперкласу Employee
+    this.salary += 10000; // Збільшуємо зарплату на 10000
+  }
 }
 
+// Створюємо екземпляри класів Employee і Manager
+const employee = new Employee('Alice', 'Engineering', 50000);
+const manager = new Manager('Bob', 'Engineering', 50000);
+
+// Викликаємо методи та виводимо результати
+console.log(employee.getEmployeeDetails()); // Name: Alice, Department: Engineering, Salary: 50000
+console.log(manager.getEmployeeDetails()); // Name: Bob, Department: Engineering, Salary: 60000
 
 export {};
